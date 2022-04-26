@@ -1,0 +1,113 @@
+:root {
+    --color1: #FE5CA6;
+    --color2: #AF3C75;
+    --color3: #FFFFFF;
+    --header-padding: 9rem;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--color3);
+}
+
+body {
+    background-color: var(--color2);
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background-color: var(--color1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: var(--header-padding);
+    padding-right: var(--header-padding);
+}
+
+.game-title {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.img-container {
+    width: 6rem;
+}
+
+.img-container>img {
+    width: 100%;
+}
+
+main {
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    width: 70vh;
+    height: 70vh;
+    background-color: var(--color2);
+}
+
+.grid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.grid-item {
+    color: var(--color3);
+    border: 1px solid var(--color1);
+    cursor: pointer;
+}
+
+span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div label {
+    text-transform: uppercase;
+    font-size: .9rem;
+}
+
+select {
+    background-color: var(--color1);
+    border: 1px solid var(--color3);
+    border-radius: 10px;
+    font-size: .9rem;
+}
+
+button {
+    background-color: var(--color1);
+    color: var(--color3);
+    padding: .1rem 1rem;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: var(--color3);
+    color: var(--color1);
+}
+
+.active {
+    background-image: url(../img/vecteezy_flower-icon_1190575.png);
+    background-size: 4.2vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent;
+}
