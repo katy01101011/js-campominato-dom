@@ -26,19 +26,44 @@
 let limit;
 let difficult;
 let grid = document.querySelector('.grid');
-let bombs = [];
 const bombsQuantity = 16;
+let bombs = [];
+let bomb;
+let timerValue = 11; // Al 'click' devo ripristinare il valore iniziale
+
 
 // AL 'CLICK' SI GIOCA
+document.getElementById('start').addEventListener('click', timer);
 document.getElementById('start').addEventListener('click', gridWithSquares);
 
 // GAME FUNCTIONS
+
+// End Game
+
+/**
+ * Description // Timer
+ * @returns {any}
+ */
+function timer() {
+    timerValue = 11;
+    const myTimer = setInterval(function() {
+        timerValue--;
+        document.getElementById('timer').innerHTML = timerValue;
+        if (timerValue === 0) {
+            clearInterval(myTimer);
+        }
+    }, 1000);
+}
 
 /** PREPARAZIONE GRIGLIA PER IL GIOCO
  * Description // ADD: n 'clickable' squares in a grid
  * @returns {Object} // squares -> grid items
  */
 function gridWithSquares() {
+    // Nascondo la scritta iniziale
+    document.getElementById('start-text').classList.add('hidden');
+    document.getElementById('timer').classList.remove('hidden');
+
     grid.innerHTML = ''; // Ripulisco griglia
 
     difficult = parseInt(document.getElementById('mylevel').value);
@@ -47,32 +72,36 @@ function gridWithSquares() {
     limit = Math.pow(difficult, 2);
     console.log(limit);
 
-    // Creo l'array i numeri delle bombe
+    // CREO LE BOMNBE
+    // Creo l'array con i numeri delle bombe
     bombArray = randomNumbers(bombs, bombsQuantity);
     console.log(bombArray);
+
+    // Leggo i numeri dentro l'array
+    for (let i = 0; i < bombArray.length; i++) {
+        bomb = bombArray[i];
+        console.log(bomb);
+    }
 
     // Creo le caselle della griglia
     for (let i = 1; i <= limit; i++) {
         let gridItem = newGridSquare(i, difficult);
 
-        let spanNumber = parseInt(document.querySelector('span').textContent);
-        console.log(spanNumber);
-
         //Aggiungo il click ad ogni cella
         gridItem.addEventListener('click', function() {
-            this.classList.add('active');
 
-
-            let bomb;
-            // Leggo i numeri dentro l'array
-            for (let i = 0; i < bombArray.length; i++) {
-                bomb = bombArray[i];
-                console.log(bomb);
+            if (bombArray.includes(i)) {
+                gridItem.classList.add('bomb');
+            } else {
+                gridItem.classList.add('active');
             }
         }  
     )
+
     grid.append(gridItem);
 }
+
+    
     return grid;
 }
 
@@ -84,7 +113,9 @@ function gridWithSquares() {
 function newGridSquare(spanText, rowColQuantity) {
 
     const newSquare = document.createElement("div");
-    newSquare.innerHTML = `<span>${spanText}</span>`;
+    let newSpan = document.createElement('span');
+    newSpan.innerHTML = spanText;
+    newSquare.append(newSpan);
     newSquare.style.width = `calc(100% / ${rowColQuantity})`;
     newSquare.style.height = `calc(100% / ${rowColQuantity})`;
     newSquare.classList.add("grid-item");
