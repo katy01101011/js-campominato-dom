@@ -104,10 +104,13 @@ button:hover {
     color: var(--color1);
 }
 
-.active {
+.bomb {
     background-image: url(../img/vecteezy_flower-icon_1190575.png);
     background-size: 4.2vh;
     background-position: center;
     background-repeat: no-repeat;
-    color: transparent;
+}
+
+.active {
+    background-color: var(--color1);
 }
