@@ -23,34 +23,46 @@
 
 
 // COSTANTI GLOBAL
+let startBtn = document.getElementById('start');
 let limit;
 let difficult;
 let grid = document.querySelector('.grid');
 const bombsQuantity = 16;
 let bombs = [];
 let bomb;
-let timerValue = 11; // Al 'click' devo ripristinare il valore iniziale
+let timerValue = 10; // Al 'click' devo ripristinare il valore iniziale
 
 
 // AL 'CLICK' SI GIOCA
-document.getElementById('start').addEventListener('click', timer);
-document.getElementById('start').addEventListener('click', gridWithSquares);
+startBtn.addEventListener('click', timer);
+startBtn.addEventListener('click', gridWithSquares);
+stopGame;
 
 // GAME FUNCTIONS
 
 // End Game
+
+
+function stopGame() {
+    if (timerValue === 0) {
+        gridItem.removeEventListener('click', function() {
+            console.log('ciao');
+        })
+    }
+}
 
 /**
  * Description // Timer
  * @returns {any}
  */
 function timer() {
-    timerValue = 11;
+    timerValue = 10;
+    startBtn.style.pointerEvents = 'auto';
     const myTimer = setInterval(function() {
         timerValue--;
         document.getElementById('timer').innerHTML = timerValue;
         if (timerValue === 0) {
-            clearInterval(myTimer);
+            clearInterval(myTimer);    
         }
     }, 1000);
 }
@@ -99,9 +111,7 @@ function gridWithSquares() {
     )
 
     grid.append(gridItem);
-}
-
-    
+} 
     return grid;
 }
 
